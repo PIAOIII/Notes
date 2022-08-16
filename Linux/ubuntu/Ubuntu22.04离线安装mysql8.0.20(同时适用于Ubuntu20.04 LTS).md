@@ -1,13 +1,11 @@
 [TOC]
 
 # Ubuntu22.04离线安装mysql_8.0.20(同时适用于Ubuntu20.04 LTS)
-
+## 安装
 #### 下载离线包
 >https://downloads.mysql.com/archives/community/
 
 ![图 1](https://cdn.jsdelivr.net/gh/PIAOIII/notes_static/imgs/ubuntu22.04%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql8.0.20(%E5%90%8C%E6%97%B6%E9%80%82%E7%94%A8%E4%BA%8EUbuntu20.04%20LTS)-%E4%B8%8B%E8%BD%BDmysql%E5%AE%89%E8%A3%85%E5%8C%85.png)  
-
-**bu**
 
 **下载完成，如图：**
 ![图 2](https://cdn.jsdelivr.net/gh/PIAOIII/notes_static/imgs/ubuntu22.04%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql8.0.20(%E5%90%8C%E6%97%B6%E9%80%82%E7%94%A8%E4%BA%8EUbuntu20.04%20LTS)-%E4%B8%8B%E8%BD%BD%E7%9A%84mysql%E5%AE%89%E8%A3%85%E5%8C%85.png)  
@@ -17,11 +15,21 @@
 
 **Ubuntu22.04和Ubuntu20.04 LTS 安装mysql的区别就在于这里依赖的文件的版本**
 
-**需要下载的两个文件：**
+**需要下载的几个文件：**
+>**前两个包是必须要下载的**
 >libaio1_0.3.112-13build1_amd64.deb
 >链接：https://pkgs.org/download/libaio1
 >libmecab2_0.996-14build9_amd64.deb
 >链接：https://pkgs.org/download/libmecab2
+>**下面几个包是mtr和调试二进制源码需要的依赖，如果用不到可以不下**
+>libjson-perl_4.04000-1_all.deb
+>链接：https://pkgs.org/search/?q=libjson-perl
+>mecab-ipadic-utf8_2.7.0-20070801+main-3_all.deb
+>链接：https://pkgs.org/search/?q=mecab-ipadic-utf8
+>mecab-utils_0.996-14build9_amd64.deb
+>链接：https://pkgs.org/search/?q=mecab-utils
+>mecab-ipadic_2.7.0-20070801+main-3_all.deb
+>链接：https://pkgs.org/search/?q=mecab-ipadic
 
 ![图 4](https://cdn.jsdelivr.net/gh/PIAOIII/notes_static/imgs/ubuntu22.04%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql8.0.20(%E5%90%8C%E6%97%B6%E9%80%82%E7%94%A8%E4%BA%8EUbuntu20.04%20LTS)-%E4%B8%8B%E8%BD%BDlibaio1.png)  
 
@@ -91,3 +99,41 @@
 
     执行`show databases;`查看所有数据库
     ![图 19](https://cdn.jsdelivr.net/gh/PIAOIII/notes_static/imgs/ubuntu22.04%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql8.0.20(%E5%90%8C%E6%97%B6%E9%80%82%E7%94%A8%E4%BA%8EUbuntu20.04%20LTS)-%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93.png)  
+
+#### 其它
+至此，一个可用的mysql已经安装好了。
+如果有mtr和二进制源码调试的需求，把文件夹中未安装的包和它们的依赖包全部安装就可以了，安装过程和前面不能说十分相似，只能说一模一样。
+全部安装后，执行`dpkg --list|grep mysql`
+![图 1](https://cdn.jsdelivr.net/gh/PIAOIII/notes_static/imgs/ubuntu22.04%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql8.0.20(%E5%90%8C%E6%97%B6%E9%80%82%E7%94%A8%E4%BA%8EUbuntu20.04%20LTS)-list%20mysql.png)  
+
+
+## 卸载mysql
+会装自然也要会卸载，技多不压身。
+执行`dpkg --list|grep mysql`来查看已经安装的mysql的包
+![图 1](https://cdn.jsdelivr.net/gh/PIAOIII/notes_static/imgs/ubuntu22.04%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql8.0.20(%E5%90%8C%E6%97%B6%E9%80%82%E7%94%A8%E4%BA%8EUbuntu20.04%20LTS)-list%20mysql.png) 
+
+
+
+```
+libmysqlclient-dev
+libmysqlclient21:amd64
+mysql-client
+mysql-common
+mysql-community-client
+mysql-community-client-core
+mysql-community-server
+mysql-community-server-core
+mysql-community-server-debug
+mysql-community-test
+mysql-community-test-debug
+mysql-server
+mysql-testsuite
+```
+
+卸载mysql只需要把安装的包全卸载就行，卸载也需要遵循包直接的依赖关系，否则会报错：
+![图 2](https://cdn.jsdelivr.net/gh/PIAOIII/notes_static/imgs/ubuntu22.04%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql8.0.20(%E5%90%8C%E6%97%B6%E9%80%82%E7%94%A8%E4%BA%8EUbuntu20.04%20LTS)-%E5%8D%B8%E8%BD%BD%E6%8A%A5%E9%94%99.png)  
+
+
+![图 3](https://cdn.jsdelivr.net/gh/PIAOIII/notes_static/imgs/ubuntu22.04%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql8.0.20(%E5%90%8C%E6%97%B6%E9%80%82%E7%94%A8%E4%BA%8EUbuntu20.04%20LTS)-%E5%8D%B8%E8%BD%BD%E5%AE%8C%E6%AF%95.png)  
+
+至此，mysql相关包全部卸载完成，对于之前安装的依赖包，不再需要的话也可以卸载掉，方法一样。
