@@ -1,0 +1,12 @@
+{
+	"py Snippet": {
+		"scope": "markdownDescription",
+		"prefix": "py",
+		"body": [
+			"```py",
+			"$1",
+			"```"
+		],
+		"description": "py Snippet"
+	}
+}
